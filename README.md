@@ -2,8 +2,10 @@
 # Tasks
 - [ ] Bird Detection
   - [ ] Connect camera to code
-  - [ ] Detect objects with code
-  - [ ] Classify which objects are birds and which arent.
+  - [ ] Camera takes constant photos
+  - [ ] Send every frame to vision api
+  - [ ] Search the list it sends back for positive images
+  - [ ] If image is positive, then process each photo to find points to point laser at.
 - [ ] Point Laser
   - [ ] To be discussed...
 - [ ] Draw Graph
@@ -18,3 +20,5 @@
   - https://github.com/xmba15/yolov3_pytorch
   - https://github.com/jsten07/countYourBirds
   - https://github.com/akshayvermadtu/BirdDetectionML
+
+hello name is Zack
