@@ -1,7 +1,7 @@
 ## Bird-Detector-Defeator
 # Tasks
 - [ ] Bird Detection
-  - [x] Connect camera to code
+  - [ ] Connect camera to code
   - [ ] Camera takes constant photos
   - [ ] Send every frame to vision api
   - [ ] Search the list it sends back for positive images
