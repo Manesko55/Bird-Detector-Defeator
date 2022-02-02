@@ -1,11 +1,11 @@
 ## Bird-Detector-Defeator
 # Tasks
-- [ ] Bird Detection
-  - [ ] Connect camera to code
+- [x] Bird Detection
+  - [x] Connect camera to code
   - [ ] Camera takes constant photos
-  - [ ] Send every frame to vision api
-  - [ ] Search the list it sends back for positive images
-  - [ ] If image is positive, then process each photo to find points to point laser at.
+  - [x] Send every frame to vision api
+  - [x] Search the list it sends back for positive images
+  - [x] If image is positive, then process each photo to find points to point laser at.
 - [ ] Point Laser
   - [ ] To be discussed...
 - [ ] Draw Graph
