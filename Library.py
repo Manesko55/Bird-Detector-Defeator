@@ -158,8 +158,8 @@ def direct_motor(turn, pitch):
         elif (max == pitch_steps):
             Motor2.TurnStep(Dir = pitch_direction, steps = 1, stepdelay = 0.001)
             Motor2.Stop()
-            
-            
+
+
 
 
 """
