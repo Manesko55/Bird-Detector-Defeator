@@ -125,6 +125,43 @@ def turn_mirror(c):
   Motor1.Stop()
   Motor2.Stop()
 
+
+def direct_motor(turn, pitch):
+    if (turn >= 0):
+        turn_direction = "forward"
+    elif (turn < 0):
+        turn_direction = "backward"
+
+    if (pitch >= 0):
+        pitch_direction = "forward"
+    elif (pitch < 0):
+        pitch_direction = "backward"
+
+    turn_steps = abs(turn)
+    pitch_steps = abs(pitch)
+
+    max = max(turn_steps, pitch_steps)
+    min = min(turn_steps, pitch_steps)
+
+    for i in range(max):
+        if (i < min):
+            if (min == turn_steps):
+                Motor1.TurnStep(Dir = turn_direction, steps = 1, stepdelay = 0.001)
+                Motor1.Stop()
+            elif (min == pitch_steps):
+                Motor2.TurnStep(Dir = pitch_direction, steps = 1, stepdelay = 0.001)
+                Motor2.Stop()
+            
+        if (max == turn_steps):
+            Motor1.TurnStep(Dir = turn_direction, steps = 1, stepdelay = 0.001)
+            Motor1.Stop()
+        elif (max == pitch_steps):
+            Motor2.TurnStep(Dir = pitch_direction, steps = 1, stepdelay = 0.001)
+            Motor2.Stop()
+            
+            
+
+
 """
 pitch_mirror(-512)
 turn_mirror(512)
