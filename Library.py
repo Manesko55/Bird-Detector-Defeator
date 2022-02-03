@@ -180,9 +180,9 @@ def laser_off():
   GPIO.output(26, GPIO.LOW)
 
 def laser(t):
-  GPIO.output(26, GPIO.HIGH)
+  laser_on()
   time.sleep(t)
-  GPIO.output(26, GPIO.LOW)
+  laser_off()
 
 
 """
