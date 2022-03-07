@@ -81,8 +81,10 @@ def setText_norefresh(text):
         bus.write_byte_data(DISPLAY_TEXT_ADDR,0x40,ord(c))
 
 
+################################################################
 # motor functionailty
-Motor1 = DRV8825(dir_pin=13, step_pin=19, enable_pin=12, mode_pins=(16,>Motor2 = DRV8825(dir_pin=24, step_pin=18, enable_pin=4, mode_pins=(21, >
+Motor1 = DRV8825(dir_pin=13, step_pin=19, enable_pin=12, mode_pins=(16, 17, 20))
+Motor2 = DRV8825(dir_pin=24, step_pin=18, enable_pin=4, mode_pins=(21, 22, 27))
 
 def pitch_mirror(c):
     global direction
@@ -95,7 +97,10 @@ def pitch_mirror(c):
         c *= -1
 
     if (direction == "forward"):
-        setText_norefresh("up: " + str(c) + " steps " + "/ " + str(roun>    else:        setText_norefresh("down: -" + str(c) + " steps " + "/ -" + str(>
+        setText_norefresh("up: " + str(c) + " steps " + "/ " + str(round(((360/2048)*c),2)) + " deg")
+    else:
+        setText_norefresh("down: -" + str(c) + " steps " + "/ -" + str(round(((360/2048)*c),2)) + " deg")
+
 
     Motor2.TurnStep(Dir = direction, steps = c, stepdelay = 0.001)      
     Motor2.Stop()
@@ -103,7 +108,8 @@ def pitch_mirror(c):
     
      
 def turn_mirror(c):
-    global direction    direction = ""
+    global direction
+    direction = ""
     Motor1.SetMicroStep('hardward','fullstep')
     if (c >= 0):
         direction = "forward"
@@ -112,7 +118,10 @@ def turn_mirror(c):
         c *= -1
 
     if (direction == "forward"):
-        setText_norefresh("l/r: " + str(c) + " steps " + "/ " + str(rou>    else:        setText_norefresh("l/r: -" + str(c) + " steps " + "/ -" + str(r>
+        setText_norefresh("l/r: " + str(c) + " steps " + "/ " + str(round(((360/2048)*c),2)) + " deg")
+    else:
+        setText_norefresh("l/r: -" + str(c) + " steps " + "/ -" + str(round(((360/2048)*c),2)) + " deg")
+
 
     Motor1.TurnStep(Dir = direction, steps = c, stepdelay = 0.001)      
     Motor1.Stop()
@@ -121,35 +130,33 @@ def stop_motors():
     Motor1.Stop()
     Motor2.Stop()
 
-"""pitch_mirror(-512)
-turn_mirror(512)
-pitch_mirror(512)
-turn_mirror(-512)"""
 
-
+################################################################
 # laser functionailty
 GPIO.setup(26, GPIO.OUT)
 
+# turns laser on
 def laser_on():
     GPIO.output(26, GPIO.HIGH)
-
+# turns laser off
 def laser_off():
     GPIO.output(26, GPIO.LOW)
-
+# laser on and off, on for t seconds
 def laser(t):
     GPIO.output(26, GPIO.HIGH)
     time.sleep(t)
     GPIO.output(26, GPIO.LOW)
+# strobes laser for t seconds, strobe_freq of 10 or 20 Hz are good values
+def strobe_laser(strobe_for, strobe_freq):
+    ct = time.time()
+    while (time.time() <= (ct+strobe_for)):
+        laser((1/strobe_freq)/2)
+        time.sleep((1/strobe_freq)/2)
 
 
-ct = time.time()
-while (time.time() <= (ct+5)):
-    laser(0.05)
-    time.sleep(0.05)
 
 
-
-
+################################################################
 # lcd functionality
 def write_lcd(text):
     setText_norefresh(text)
@@ -161,6 +168,18 @@ def write_lcd(text):
 
 def lcd_colour(r, g, b):
     setRGB(r, g, b)
+
+
+"""
+strobe_laser(5, 10)
+"""
+
+"""
+pitch_mirror(-512)
+turn_mirror(512)
+pitch_mirror(512)
+turn_mirror(-512)
+"""
 
 """
 write_lcd("Procedures end")
