@@ -2,6 +2,7 @@ import picamera
 import os
 from  google.cloud import vision
 
+
 windowWidth = 4056
 windowHeight = 3040
 
